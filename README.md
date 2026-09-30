@@ -1,11 +1,33 @@
-<div align="center">
+# Daily Ledger — Native Android
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+A clean, local-first personal finance app written in Kotlin + Jetpack Compose.
 
-  <h1>Built with AI Studio</h2>
+## Included
+- Google Sign-In screen (Credential Manager; requires your OAuth client ID)
+- Separate Dashboard, Transactions, Loans, Kameti, Savings modules
+- PKR-first money model using integer paisa (no floating-point storage)
+- Room local database with account-scoped records
+- Dark / Light / System themes
+- Loan repayments and outstanding balances
+- Kameti installment history and payout status
+- Direct savings and leftover savings separately
+- Encrypted Google Drive `appDataFolder` backup/sync
+- WorkManager background sync and reminder checks
+- AES-GCM cloud-backup encryption using a user sync passphrase
+- Sync passphrase stored locally using Android Keystore
+- Biometric/device-credential app lock
+- CSV and PDF exports to Downloads
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Open and build
+1. On Linux/macOS, run `./gradlew --version` once. On Windows run `gradlew.bat --version`. The bootstrap script downloads the official Gradle wrapper jar if it is missing.
+2. Open this folder in Android Studio and let Gradle sync.
+3. For local-only testing, press Run. The login screen includes an offline profile.
+4. For Google login + Drive sync, follow `GOOGLE-SETUP.md`.
+5. Build APK: **Build → Build App Bundle(s) / APK(s) → Build APK(s)**.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+See `BUILD-APK.md` for command-line build steps.
 
-</div>
+## Privacy model
+Financial data is local-first. Each signed-in account has its own owner ID in Room. Google Drive backup is encrypted before upload. The backup passphrase is never uploaded; keep it safe if you want to restore on another device.
+
+Local Room data relies on Android's app sandbox / device encryption. The Drive backup itself is application-level AES-GCM encrypted.
